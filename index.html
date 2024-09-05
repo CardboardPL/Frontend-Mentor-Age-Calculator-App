@@ -3,11 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
   <title>Frontend Mentor | Age calculator app</title>
-
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
   <style>
     .attribution { font-size: 11px; text-align: center; }
@@ -15,23 +12,54 @@
   </style>
 </head>
 <body>
-
-  Day
-  DD
-
-  Month
-  MM
-
-  Year
-  YYYY
-
-  -- years
-  -- months
-  -- days
+  <main>
+    <form action="javascript:void(0)" class="form">
+      <h1 class="form__header">Age Calculator</h1>
+      <fieldset class="form__fieldset">
+        <legend class="fieldset__legend">Date of Birth</legend>
   
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+        <div class="fieldset__input-wrapper">
+          <label class="fieldset__input-label" for="dayOfBirth">Day</label>
+          <input class="fieldset__input" id="dayOfBirth" name="dayOfBirth" type="text" placeholder="DD">
+          <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
+        </div>
+  
+        <div class="fieldset__input-wrapper">
+          <label class="fieldset__input-label" for="monthOfBirth">Month</label>
+          <input class="fieldset__input" id="monthOfBirth" name="monthOfBirth" type="text" placeholder="MM">
+          <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
+        </div>
+        
+        <div class="fieldset__input-wrapper">
+          <label class="fieldset__input-label" for="yearOfBirth">Year</label>
+          <input class="fieldset__input" id="yearOfBirth" name="yearOfBirth" type="text" placeholder="YYYY">
+          <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
+        </div>
+      </fieldset>
+  
+      <button type="submit" class="form__submit-button" aria-label="Calculate age">
+        <img class="submit-button__image" src="./assets/images/icon-arrow.svg" alt="Calculate age">
+      </button>
+  
+      <output class="form__results">
+        <div class="results__item">
+          <span class="item__quantity js-years">--</span> years
+        </div>
+  
+        <div class="results__item">
+          <span class="item__quantity js-months">--</span> months
+        </div>
+  
+        <div class="results__item">
+          <span class="item__quantity js-days">--</span> days
+        </div>
+      </output>
+    </form>
+  </main>
+  
+  <footer class="attribution">
+    Challenge by <a rel="noopener noreferrer" href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a rel="noopener noreferrer" href="https://github.com/CardboardPL">CardboardPL</a>.
+  </footer>
 </body>
 </html>
