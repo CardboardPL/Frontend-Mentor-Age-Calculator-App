@@ -1,0 +1,17 @@
+:root {
+  /* Primary Colors */
+  --clr-purple: hsl(259, 100%, 65%);
+  --clr-lightred: hsl(0, 100%, 67%);
+
+  /* Neutral Colors */
+  --clr-white: hsl(0, 0%, 100%);
+  --clr-offwhite: hsl(0, 0%, 94%);
+  --clr-lightgrey: hsl(0, 0%, 86%);
+  --clr-smokeygrey: hsl(0, 1%, 44%);
+  --clr-offblack: hsl(0, 0%, 8%);
+
+  /* Font Weights */
+  --fw-r: 400;
+  --fw-b: 700;
+  --fw-xb: 800;
+}
