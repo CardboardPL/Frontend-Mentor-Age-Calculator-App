@@ -14,48 +14,52 @@
 </head>
 <body>
   <main>
-    <form action="javascript:void(0)" class="form">
-      <h1 class="form__header">Age Calculator</h1>
-      <fieldset class="form__fieldset">
-        <legend class="fieldset__legend">Date of Birth</legend>
+    <article class="calculator">
+      <form action="javascript:void(0)" class="calculator__form">
+        <h1 class="form__header u-sr-only">Age Calculator</h1>
+        <fieldset class="form__fieldset">
+          <legend class="fieldset__legend u-sr-only">Date of Birth</legend>
+    
+          <div class="fieldset__input-wrapper">
+            <label class="fieldset__input-label" for="dayOfBirth">Day</label>
+            <input class="fieldset__input" id="dayOfBirth" name="dayOfBirth" type="text" placeholder="DD">
+            <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
+          </div>
+    
+          <div class="fieldset__input-wrapper">
+            <label class="fieldset__input-label" for="monthOfBirth">Month</label>
+            <input class="fieldset__input" id="monthOfBirth" name="monthOfBirth" type="text" placeholder="MM">
+            <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
+          </div>
+          
+          <div class="fieldset__input-wrapper">
+            <label class="fieldset__input-label" for="yearOfBirth">Year</label>
+            <input class="fieldset__input" id="yearOfBirth" name="yearOfBirth" type="text" placeholder="YYYY">
+            <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
+          </div>
+        </fieldset>
+    
+        <button type="submit" class="form__submit-button" aria-label="Calculate age">
+          <img class="submit-button__image" src="./assets/images/icon-arrow.svg" alt="Calculate age">
+        </button>
+      </form>
   
-        <div class="fieldset__input-wrapper">
-          <label class="fieldset__input-label" for="dayOfBirth">Day</label>
-          <input class="fieldset__input" id="dayOfBirth" name="dayOfBirth" type="text" placeholder="DD">
-          <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
-        </div>
+      <hr>
   
-        <div class="fieldset__input-wrapper">
-          <label class="fieldset__input-label" for="monthOfBirth">Month</label>
-          <input class="fieldset__input" id="monthOfBirth" name="monthOfBirth" type="text" placeholder="MM">
-          <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
-        </div>
-        
-        <div class="fieldset__input-wrapper">
-          <label class="fieldset__input-label" for="yearOfBirth">Year</label>
-          <input class="fieldset__input" id="yearOfBirth" name="yearOfBirth" type="text" placeholder="YYYY">
-          <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
-        </div>
-      </fieldset>
-  
-      <button type="submit" class="form__submit-button" aria-label="Calculate age">
-        <img class="submit-button__image" src="./assets/images/icon-arrow.svg" alt="Calculate age">
-      </button>
-  
-      <output class="form__results">
-        <div class="results__item">
+      <div class="calculator__results">
+        <div class="results__item" aria-live="polite">
           <span class="item__quantity js-years">--</span> years
         </div>
-  
+    
         <div class="results__item">
-          <span class="item__quantity js-months">--</span> months
+          <span class="item__quantity js-months" aria-live="polite">--</span> months
         </div>
-  
+    
         <div class="results__item">
-          <span class="item__quantity js-days">--</span> days
+          <span class="item__quantity js-days" aria-live="polite">--</span> days
         </div>
-      </output>
-    </form>
+      </div>
+    </article>
   </main>
   
   <footer class="attribution">

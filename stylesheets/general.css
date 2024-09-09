@@ -11,11 +11,12 @@ html {
 body {
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-size: 1rem;
-  font-weight: var(--fx-r);
+  font-weight: var(--fw-r);
   font-style: normal;
   line-height: 1.5;
   letter-spacing: 0;
-  background-color: var(--clr-lightgrey);
+  color: var(--clr-offblack);
+  background-color: var(--clr-offwhite);
 }
 
 main {
@@ -36,5 +37,6 @@ img {
 }
 
 button, input {
+  display: block;
   font: inherit;
 }
