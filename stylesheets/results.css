@@ -1,0 +1,19 @@
+.calculator__results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding: 66.5px 0 26.5px 0;
+}
+
+.results__item {
+  font-size: 56px;
+  font-weight: var(--fw-xb);
+  font-style: italic;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+
+.results__item > .item__quantity {
+  color: var(--clr-purple);
+  margin-right: -1px;
+}
