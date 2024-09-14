@@ -32,6 +32,14 @@
   padding: 15px;
   border: 1px solid var(--clr-lightgrey);
   border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease-in-out;
+}
+
+.fieldset__input:hover,
+.fieldset__input:focus-within {
+  border-color: var(--clr-purple);
+  cursor: pointer;
 }
 
 .fieldset__input::placeholder {
@@ -53,6 +61,8 @@
   border: none;
   border-radius: 50%;
   cursor: pointer;
+  transition: 
+    background-color 0.15s ease-in-out;
 }
 
 .form__submit-button > img {
@@ -61,4 +71,8 @@
 
 .form__submit-button:hover {
   background-color: var(--clr-offblack);
+}
+
+.form__submit-button:active {
+  background-color: hsl(0, 0%, 13%);
 }
