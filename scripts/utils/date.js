@@ -25,7 +25,7 @@ function calculateDateFromDate(date) {
   return { years, months, days }
 }
 
-function isValidDate(date) {
+export function isValidDate(date) {
   return !isNaN(date.getTime());
 }
 
@@ -49,7 +49,7 @@ function calculateDays(d1, d2) {
   return Math.floor(time / (1000 * 60 * 60 * 24 ));
 }
 
-function isLeapYear(year) {
+export function isLeapYear(year) {
   if (typeof year !== 'number' || isNaN(year)) {
     console.error(`Invalid year encountered: ${year}. Please provide a valid numerical year.`);
     return false;
