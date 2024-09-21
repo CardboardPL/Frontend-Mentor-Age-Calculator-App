@@ -1,6 +1,10 @@
 import { isValidDate, isLeapYear } from "./date.js";
 
 function isValidMonth(month) {
+  if (typeof month !== 'number') {
+    month = Number(month);
+  }
+  if (isNaN(month)) return false;
   return month > 0 && month <= 12;
 }
 
@@ -34,30 +38,36 @@ export function validateDateString(dateStr) {
     return { status: false };
   }
 
-  if (!isValidDate(new Date(dateStr))) {
-    const dateStrComponents = dateStr.split('/');
-    let [isMonthValid, isDayValid, isYearValid] = [true, true, true];
-
-    const month = parseInt(dateStrComponents[0]);
-    const day = parseInt(dateStrComponents[1]);
-    const year = parseInt(dateStrComponents[2]);
-
-    // Checks if the given month is valid
-    if (isValidMonth(month)) {
-      isMonthValid = false;
+  const dateStrComponents = dateStr.split('/');
+  let isValid = {
+    state: true,
+    setToInvalid: function () {
+      this.state = false;
     }
+  };
+  let [isMonthValid, isDayValid, isYearValid] = [true, true, true];
 
-    // Checks if the given day is valid
-    if (!isValidDayForMonth(day, month, year)) {
-      isDayValid = false;
-    }
+  const month = parseInt(dateStrComponents[0]);
+  const day = parseInt(dateStrComponents[1]);
+  const year = parseInt(dateStrComponents[2]);
 
-    // Checks if the given year is valid
-    if (year <= 0) {
-      isYearValid = false;
-    }
-
-    return { status: false, isMonthValid, isDayValid, isYearValid };
+  // Checks if the given month is valid
+  if (!isValidMonth(month)) {
+    isValid.setToInvalid();
+    isMonthValid = false;
   }
-  return { status: true };
+
+  // Checks if the given day is valid
+  if (!isValidDayForMonth(day, month, year)) {
+    isValid.setToInvalid();
+    isDayValid = false;
+  }
+
+  // Checks if the given year is valid
+  if (year <= 0) {
+    isValid.setToInvalid();
+    isYearValid = false;
+  }
+
+  return isValid.state ? { status: true } : { status: false, isMonthValid, isDayValid, isYearValid };
 }
