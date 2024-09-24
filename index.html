@@ -5,41 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" type="text/css" href="./stylesheets/index.css">
+  <script src="./scripts/calculator.js" type="module"></script>
   <title>Frontend Mentor | Age calculator app</title>
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
   <main>
     <article class="calculator">
-      <form action="javascript:void(0)" class="calculator__form">
+      <form action="javascript:void(0)" class="calculator__form js-form">
         <h1 class="form__header u-sr-only">Age Calculator</h1>
         <fieldset class="form__fieldset">
           <legend class="fieldset__legend u-sr-only">Date of Birth</legend>
     
           <div class="fieldset__input-wrapper">
             <label class="fieldset__input-label" for="dayOfBirth">Day</label>
-            <input class="fieldset__input" id="dayOfBirth" name="dayOfBirth" type="text" placeholder="DD">
+            <input class="fieldset__input js-input" id="dayOfBirth" name="dayOfBirth" type="text" placeholder="DD" data-validation="type=number|maxLength=2" data-format="type=number|maxLength=2">
             <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
           </div>
     
           <div class="fieldset__input-wrapper">
             <label class="fieldset__input-label" for="monthOfBirth">Month</label>
-            <input class="fieldset__input" id="monthOfBirth" name="monthOfBirth" type="text" placeholder="MM">
+            <input class="fieldset__input js-input" id="monthOfBirth" name="monthOfBirth" type="text" placeholder="MM" data-validation="type=number|maxLength=2" data-format="type=number|maxLength=2">
             <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
           </div>
           
           <div class="fieldset__input-wrapper">
             <label class="fieldset__input-label" for="yearOfBirth">Year</label>
-            <input class="fieldset__input" id="yearOfBirth" name="yearOfBirth" type="text" placeholder="YYYY">
+            <input class="fieldset__input js-input" id="yearOfBirth" name="yearOfBirth" type="text" placeholder="YYYY" data-validation="type=number|minLength=4|maxLength=4" data-format="type=number|maxLength=4">
             <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
           </div>
         </fieldset>
     
-        <button type="submit" class="form__submit-button" aria-label="Calculate age">
+        <button type="submit" class="form__submit-button js-submit-button" aria-label="Calculate age">
           <img class="submit-button__image" src="./assets/images/icon-arrow.svg" alt="Calculate age">
         </button>
       </form>
