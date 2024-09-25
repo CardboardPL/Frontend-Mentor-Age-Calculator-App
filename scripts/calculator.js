@@ -12,7 +12,17 @@ document.addEventListener('click', (e) => {
     const day = formData.dayOfBirth;
     const month = formData.monthOfBirth;
     const year = formData.yearOfBirth;
-    console.log(validateDateString(`${month}/${day}/${year}`));
+    
+    for (const data in formData) {
+      const currentData = formData[data];
+      const dataInputElem = document.querySelector(`.js-input[name="${data}"]`);
+
+      if (currentData.trim() === '') {
+        dataInputElem.classList.add('invalid');
+      } else {
+        dataInputElem.classList.remove('invalid');
+      }
+    }
   }
 });
 
