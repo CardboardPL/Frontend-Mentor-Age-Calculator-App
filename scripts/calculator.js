@@ -15,12 +15,12 @@ document.addEventListener('click', (e) => {
     
     for (const data in formData) {
       const currentData = formData[data];
-      const dataInputElem = document.querySelector(`.js-input[name="${data}"]`);
+      const dataWrapperElem = document.querySelector(`.js-input[name="${data}"]`).closest('.js-fieldset-input-wrapper');
 
       if (currentData.trim() === '') {
-        dataInputElem.classList.add('invalid');
+        dataWrapperElem.classList.add('invalid');
       } else {
-        dataInputElem.classList.remove('invalid');
+        dataWrapperElem.classList.remove('invalid');
       }
     }
   }
