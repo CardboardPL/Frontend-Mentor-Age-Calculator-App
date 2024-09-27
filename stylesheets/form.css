@@ -65,6 +65,19 @@
     background-color 0.15s ease-in-out;
 }
 
+/* Invalid State Styling */
+.fieldset__input-wrapper.invalid {
+  color: var(--clr-lightred);
+}
+
+.fieldset__input-wrapper.invalid > * {
+  color: inherit;
+}
+
+.fieldset__input-wrapper.invalid > .fieldset__input {
+  border-color: var(--clr-lightred);
+}
+
 .form__submit-button > img {
   height: 38%;
 }
