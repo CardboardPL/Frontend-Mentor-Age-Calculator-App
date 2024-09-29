@@ -32,12 +32,6 @@ function isValidFormat(format, value) {
  * @param {string} dateStr - A date string following the format "MM/DD/YYYY". 
  */
 export function validateDateString(dateStr) {
-  if (!isValidFormat(/^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/, dateStr)) {
-    console.error(`Provided date string is in an invalid format. Please follow the format "MM/DD/YYYY"
-      Provided Date String: ${dateStr}`);
-    return { status: false };
-  }
-
   const dateStrComponents = dateStr.split('/');
   let isValid = {
     state: true,
