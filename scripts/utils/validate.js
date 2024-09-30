@@ -9,7 +9,7 @@ function isValidMonth(month) {
 }
 
 function isValidDayForMonth(day, month, year) {
-  if (day <= 0) return false;
+  if (day <= 0 || isNaN(day)) return false;
 
   const monthsWith30Days = [4, 6, 9, 11];
   const monthsWith31Days = [1, 3, 5, 7, 8, 10, 12];
@@ -58,7 +58,7 @@ export function validateDateString(dateStr) {
   }
 
   // Checks if the given year is valid
-  if (year <= 0) {
+  if (year <= 0 || isNaN(year)) {
     isValid.setToInvalid();
     isYearValid = false;
   }
