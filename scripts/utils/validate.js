@@ -1,5 +1,13 @@
 import { isValidDate, isLeapYear } from "./date.js";
 
+function isValidNumber(num) {
+  return !isNaN(num);
+}
+
+function isValidYear(year) {
+  return year > 0 && isValidNumber(year);
+}
+
 function isValidMonth(month) {
   if (typeof month !== 'number') {
     month = Number(month);
@@ -58,7 +66,7 @@ export function validateDateString(dateStr) {
   }
 
   // Checks if the given year is valid
-  if (year <= 0 || isNaN(year)) {
+  if (!isValidYear(year)) {
     isValid.setToInvalid();
     isYearValid = false;
   }
