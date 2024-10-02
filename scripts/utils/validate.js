@@ -17,7 +17,15 @@ function isValidMonth(month) {
 }
 
 function isValidDayForMonth(day, month, year) {
-  if (day <= 0 || isNaN(day)) return false;
+  const res = { state: true, message: '', setToInvalid: function(message) {
+    this.isValid = false;
+    this.message = message || 'Must be a valid day';
+  }};
+
+  if (day <= 0 || isNaN(day)) {
+    res.setToInvalid();
+    return res;
+  }
 
   const monthsWith30Days = [4, 6, 9, 11];
   const monthsWith31Days = [1, 3, 5, 7, 8, 10, 12];
@@ -26,9 +34,11 @@ function isValidDayForMonth(day, month, year) {
     monthsWith30Days.includes(month) && day > 30 ||
     (monthsWith31Days.includes(month) && day > 31) ||
     (month === 2 && day > (isLeapYear(year) ? 29 : 28))
-  ) return false;
+  ) {
+    res.setToInvalid();
+  }
 
-  return true;
+  return res;
 }
 
 function isValidFormat(format, value) {
@@ -60,7 +70,7 @@ export function validateDateString(dateStr) {
   }
 
   // Checks if the given day is valid
-  if (!isValidDayForMonth(day, month, year)) {
+  if (!isValidDayForMonth(day, month, year).isValid) {
     isValid.setToInvalid();
     isDayValid = false;
   }
