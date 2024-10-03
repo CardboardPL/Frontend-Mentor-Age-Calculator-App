@@ -1,5 +1,23 @@
 import { isValidDate, isLeapYear } from "./date.js";
 
+class validationResponse {
+  isValid = true;
+  message = '';
+
+  constructor(type) {
+    this.type = type;
+  }
+
+  setToInvalid(message) {
+    this.isValid = false;
+    this.message = message || `Must be a valid ${this.type}`;
+  }
+
+  isValidResponse() {
+    return this.isValid;
+  }
+}
+
 function isValidNumber(num) {
   return !isNaN(num);
 }
@@ -17,23 +35,14 @@ function isValidMonth(month) {
 }
 
 function isValidDayForMonth(day, month, year) {
-  const res = { state: true, message: '', setToInvalid: function(message) {
-    this.isValid = false;
-    this.message = message || 'Must be a valid day';
-  }};
-
-  if (day <= 0 || isNaN(day)) {
-    res.setToInvalid();
-    return res;
-  }
-
+  const res = new validationResponse('day');
   const monthsWith30Days = [4, 6, 9, 11];
   const monthsWith31Days = [1, 3, 5, 7, 8, 10, 12];
 
-  if (
-    monthsWith30Days.includes(month) && day > 30 ||
+  if (day <= 0 || isNaN(day) ||
+    (monthsWith30Days.includes(month) && day > 30 ||
     (monthsWith31Days.includes(month) && day > 31) ||
-    (month === 2 && day > (isLeapYear(year) ? 29 : 28))
+    (month === 2 && day > (isLeapYear(year) ? 29 : 28)))
   ) {
     res.setToInvalid();
   }
@@ -70,7 +79,7 @@ export function validateDateString(dateStr) {
   }
 
   // Checks if the given day is valid
-  if (!isValidDayForMonth(day, month, year).isValid) {
+  if (!isValidDayForMonth(day, month, year).isValidResponse()) {
     isValid.setToInvalid();
     isDayValid = false;
   }
