@@ -1,20 +1,25 @@
 import { isValidDate, isLeapYear } from "./date.js";
 
 class validationResponse {
-  isValid = true;
+  #isValid = true;
   message = '';
 
   constructor(type) {
+    if (!type) {
+      type = 'input';
+    } else if (typeof type !== 'string') {
+      type = typeof type;
+    }
     this.type = type;
   }
 
   setToInvalid(message) {
-    this.isValid = false;
+    this.#isValid = false;
     this.message = message || `Must be a valid ${this.type}`;
   }
 
   isValidResponse() {
-    return this.isValid;
+    return this.#isValid;
   }
 }
 
