@@ -28,15 +28,25 @@ function isValidNumber(num) {
 }
 
 function isValidYear(year) {
-  return year > 0 && isValidNumber(year);
+  const res = new validationResponse('year');
+
+  if (!(year > 0 && isValidNumber(year))) {
+    res.setToInvalid();
+  }
+
+  return res;
 }
 
 function isValidMonth(month) {
+  const res = new validationResponse('month');
+
   if (typeof month !== 'number') {
     month = Number(month);
   }
-  if (isNaN(month)) return false;
-  return month > 0 && month <= 12;
+  if (isNaN(month) || !(month > 0 && month <= 12)) {
+    res.setToInvalid();
+  };
+  return res;
 }
 
 function isValidDayForMonth(day, month, year) {
@@ -65,35 +75,24 @@ function isValidFormat(format, value) {
  */
 export function validateDateString(dateStr) {
   const dateStrComponents = dateStr.split('/');
-  let isValid = {
-    state: true,
-    setToInvalid: function () {
-      this.state = false;
-    }
-  };
-  let [isMonthValid, isDayValid, isYearValid] = [true, true, true];
+  const isValid = new validationResponse('dateString');
 
   const month = parseInt(dateStrComponents[0]);
   const day = parseInt(dateStrComponents[1]);
   const year = parseInt(dateStrComponents[2]);
 
-  // Checks if the given month is valid
-  if (!isValidMonth(month)) {
+  const [isMonthValid, isDayValid, isYearValid] = [
+    isValidMonth(month), 
+    isValidDayForMonth(day, month, year), 
+    isValidYear(year)];
+
+  // Checks if the given month, day, and year is valid
+  if (!isMonthValid.isValidResponse() ||
+      !isDayValid.isValidResponse() ||
+      !isYearValid.isValidResponse()
+  ) {
     isValid.setToInvalid();
-    isMonthValid = false;
   }
 
-  // Checks if the given day is valid
-  if (!isValidDayForMonth(day, month, year).isValidResponse()) {
-    isValid.setToInvalid();
-    isDayValid = false;
-  }
-
-  // Checks if the given year is valid
-  if (!isValidYear(year)) {
-    isValid.setToInvalid();
-    isYearValid = false;
-  }
-
-  return isValid.state ? { status: true } : { status: false, isMonthValid, isDayValid, isYearValid };
+  return isValid.isValidResponse() ? { status: true } : { status: false, isMonthValid, isDayValid, isYearValid };
 }
