@@ -12,13 +12,15 @@ document.addEventListener('click', (e) => {
     const day = formData.dayOfBirth;
     const month = formData.monthOfBirth;
     const year = formData.yearOfBirth;
-    
+    let isValid = true;
+
     for (const data in formData) {
       const currentData = formData[data];
       const dataWrapperElem = document.querySelector(`.js-input[name="${data}"]`).closest('.js-fieldset-input-wrapper');
 
       if (currentData.trim() === '') {
         dataWrapperElem.classList.add('invalid');
+        isValid = false;
       } else {
         dataWrapperElem.classList.remove('invalid');
       }
