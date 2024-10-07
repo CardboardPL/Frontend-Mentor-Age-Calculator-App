@@ -16,19 +16,19 @@
         <fieldset class="form__fieldset">
           <legend class="fieldset__legend u-sr-only">Date of Birth</legend>
     
-          <div class="fieldset__input-wrapper js-fieldset-input-wrapper">
+          <div class="fieldset__input-wrapper js-fieldset-input-wrapper" data-type="Day">
             <label class="fieldset__input-label" for="dayOfBirth">Day</label>
             <input class="fieldset__input js-input" id="dayOfBirth" name="dayOfBirth" type="text" placeholder="DD" data-validation="type=number|maxLength=2" data-format="type=number|maxLength=2">
             <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
           </div>
     
-          <div class="fieldset__input-wrapper js-fieldset-input-wrapper">
+          <div class="fieldset__input-wrapper js-fieldset-input-wrapper" data-type="Month">
             <label class="fieldset__input-label" for="monthOfBirth">Month</label>
             <input class="fieldset__input js-input" id="monthOfBirth" name="monthOfBirth" type="text" placeholder="MM" data-validation="type=number|maxLength=2" data-format="type=number|maxLength=2">
             <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>
           </div>
           
-          <div class="fieldset__input-wrapper js-fieldset-input-wrapper">
+          <div class="fieldset__input-wrapper js-fieldset-input-wrapper" data-type="Year">
             <label class="fieldset__input-label" for="yearOfBirth">Year</label>
             <input class="fieldset__input js-input" id="yearOfBirth" name="yearOfBirth" type="text" placeholder="YYYY" data-validation="type=number|minLength=4|maxLength=4" data-format="type=number|maxLength=4">
             <span class="fieldset__input-error-message" aria-hidden="true" aria-live="assertive"></span>

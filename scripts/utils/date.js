@@ -1,4 +1,4 @@
-function calculateDateFromDate(date) {
+export function calculateDateFromDate(date) {
   const startDate = new Date(date);
   if (!isValidDate(startDate)) {
     console.error(`Invalid date provided: ${date}`);
