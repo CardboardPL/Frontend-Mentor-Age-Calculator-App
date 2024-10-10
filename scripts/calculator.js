@@ -18,22 +18,24 @@ document.addEventListener('click', (e) => {
 
     const dateStringValidity = validateDateString(dateString);
 
+    for (const data in formData) {
+      const currentData = formData[data];
+      const dataWrapperElem = document.querySelector(`.js-input[name="${data}"]`).closest('.js-fieldset-input-wrapper');
+      const dataType = dataWrapperElem.dataset.type;
+      const dataTypeValidity = dateStringValidity[`is${dataType}Valid`];
+
+      if (currentData.trim() === '' || !dataTypeValidity.isValidResponse()) {
+        dataWrapperElem.classList.add('invalid');
+        isValid = false;
+      } else {
+        dataWrapperElem.classList.remove('invalid');
+      }
+
+      dataWrapperElem.querySelector('.js-error-message').textContent = dataTypeValidity.message;
+    }
+
     if (dateStringValidity.status) {
       const age = calculateDateFromDate(dateString)
-    } else {
-      for (const data in formData) {
-        const currentData = formData[data];
-        const dataWrapperElem = document.querySelector(`.js-input[name="${data}"]`).closest('.js-fieldset-input-wrapper');
-        const dataType = dataWrapperElem.dataset.type;
-        const dataTypeValidity = dateStringValidity[`is${dataType}Valid`];
-  
-        if (currentData.trim() === '' || !dataTypeValidity.isValidResponse()) {
-          dataWrapperElem.classList.add('invalid');
-          isValid = false;
-        } else {
-          dataWrapperElem.classList.remove('invalid');
-        }
-      }
     }
   }
 });
