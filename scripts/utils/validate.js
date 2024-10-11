@@ -94,5 +94,5 @@ export function validateDateString(dateStr) {
     isValid.setToInvalid();
   }
 
-  return isValid.isValidResponse() ? { status: true } : { status: false, isMonthValid, isDayValid, isYearValid };
+  return { status: isValid.isValidResponse(), isMonthValid, isDayValid, isYearValid };
 }
