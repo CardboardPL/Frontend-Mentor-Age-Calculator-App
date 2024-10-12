@@ -35,7 +35,11 @@ document.addEventListener('click', (e) => {
     }
 
     if (dateStringValidity.status) {
-      const age = calculateDateFromDate(dateString)
+      const age = calculateDateFromDate(dateString);
+      
+      for (const component in age) {
+        document.querySelector(`.js-${component}`).textContent = age[component];
+      }
     }
   }
 });
