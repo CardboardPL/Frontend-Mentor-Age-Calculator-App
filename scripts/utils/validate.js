@@ -23,14 +23,34 @@ class validationResponse {
   }
 }
 
+class valuePair {
+  constructor(val1, val2) {
+    this.val1 = val1;
+    this.val2 = val2;
+  }
+}
+
 function isValidNumber(num) {
   return !isNaN(num);
 }
 
 function isValidYear(year) {
   const res = new validationResponse('year');
+  const yearNum = year.val2;
 
-  if (!(year > 0 && isValidNumber(year))) {
+  if (!year.val1.trim()) {
+    res.setToInvalid('This field is required');
+  }
+  else if (
+    // Checks if the given year is not a valid integer
+    !(isValidNumber(yearNum) && Number.isInteger(yearNum)) ||
+
+    // Checks if the given year is not in the correct range
+    yearNum < 1000 ||
+
+    // Checks if the given year is not in the correct format
+    year.val1.length !== 4
+  ) {
     res.setToInvalid();
   }
 
@@ -39,13 +59,20 @@ function isValidYear(year) {
 
 function isValidMonth(month) {
   const res = new validationResponse('month');
+  const monthNum = month.val2;
 
-  if (typeof month !== 'number') {
-    month = Number(month);
-  }
-  if (isNaN(month) || !(month > 0 && month <= 12)) {
+  // Checks if the given month is an empty value
+  if (!month.val1.trim()) {
+    res.setToInvalid('This field is required');
+  } else if (
+    // Checks if the given month is not a valid number
+    isNaN(monthNum) || !Number.isInteger(monthNum) ||
+
+    // Checks if the given month is not in the correct range
+    !(monthNum > 0 && monthNum <= 12)) {
     res.setToInvalid();
   };
+
   return res;
 }
 
@@ -54,10 +81,26 @@ function isValidDayForMonth(day, month, year) {
   const monthsWith30Days = [4, 6, 9, 11];
   const monthsWith31Days = [1, 3, 5, 7, 8, 10, 12];
 
-  if (day <= 0 || isNaN(day) ||
-    (monthsWith30Days.includes(month) && day > 30 ||
-    (monthsWith31Days.includes(month) && day > 31) ||
-    (month === 2 && day > (isLeapYear(year) ? 29 : 28)))
+  const dayNum = day.val2;
+
+  // Checks if the given day is an empty value
+  if (!day.val1.trim()) {
+    res.setToInvalid('This field is required');
+  } else if (
+    // Checks if the given day is not a valid number
+    isNaN(dayNum) || !Number.isInteger(dayNum) ||
+
+    // Checks if the given day is not in the correct range
+    dayNum <= 0 || dayNum >= 32 || 
+
+    // Checks if the given day is not appropriate for months with 30 days
+    (monthsWith30Days.includes(month) && dayNum > 30) ||
+
+    // Checks if the given day is not appropriate for months with 31 days
+    (monthsWith31Days.includes(month) && dayNum > 31) ||
+
+    // Checks if the given day is not appropriate for February which can have 28 or 29 days depending if the given year is a leap year
+    (month === 2 && dayNum > (isLeapYear(year) ? 29 : 28))
   ) {
     res.setToInvalid();
   }
@@ -65,26 +108,56 @@ function isValidDayForMonth(day, month, year) {
   return res;
 }
 
-function isValidFormat(format, value) {
-  return format.test(value);
+function isPastDate(monthPair, dayPair, yearPair) {
+  const today = new Date();
+
+  // Checks if the given year is in the future
+  if (yearPair.val2.isValidResponse() && yearPair.val1 > today.getFullYear()) {
+    yearPair.val2.setToInvalid('Must be in the past');
+
+  // Checks if the given month is in the future
+  } else if (monthPair.val2.isValidResponse() && monthPair.val1 > (today.getMonth() + 1)) {
+    monthPair.val2.setToInvalid('Must be in the past');
+
+  // Checks if the given day is in the future
+  } else if (dayPair.val2.isValidResponse() && dayPair.val1 > (today.getDate())) {
+    dayPair.val2.setToInvalid('Must be in the past');
+  }
 }
+
+// function isValidFormat(format, value) {
+//   return format.test(value);
+// }
 
 /**
  * 
  * @param {string} dateStr - A date string following the format "MM/DD/YYYY". 
  */
-export function validateDateString(dateStr) {
+export function validateDateString(dateStr, isPastRequired) {
   const dateStrComponents = dateStr.split('/');
   const isValid = new validationResponse('dateString');
 
-  const month = parseInt(dateStrComponents[0]);
-  const day = parseInt(dateStrComponents[1]);
-  const year = parseInt(dateStrComponents[2]);
+  const monthNum = Number(dateStrComponents[0]);
+  const dayNum = Number(dateStrComponents[1]);
+  const yearNum = Number(dateStrComponents[2]);
+
+  const monthPair = new valuePair(dateStrComponents[0], monthNum);
+  const dayPair = new valuePair(dateStrComponents[1], dayNum);
+  const yearPair = new valuePair(dateStrComponents[2], yearNum);
 
   const [isMonthValid, isDayValid, isYearValid] = [
-    isValidMonth(month), 
-    isValidDayForMonth(day, month, year), 
-    isValidYear(year)];
+    isValidMonth(monthPair), 
+    isValidDayForMonth(dayPair, monthNum, yearNum), 
+    isValidYear(yearPair)
+  ];
+
+  const monthValidationPair = new valuePair(monthNum, isMonthValid);
+  const dayValidationPair = new valuePair(dayNum, isDayValid);
+  const yearValidationPair = new valuePair(yearNum, isYearValid);
+
+  if (isPastRequired) {
+    isPastDate(monthValidationPair, dayValidationPair, yearValidationPair);
+  }
 
   // Checks if the given month, day, and year is valid
   if (!isMonthValid.isValidResponse() ||

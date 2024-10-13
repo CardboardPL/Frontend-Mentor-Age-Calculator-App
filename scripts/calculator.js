@@ -16,7 +16,7 @@ document.addEventListener('click', (e) => {
     const dateString = `${month}/${day}/${year}`;
     let isValid = true;
 
-    const dateStringValidity = validateDateString(dateString);
+    const dateStringValidity = validateDateString(dateString, true);
 
     for (const data in formData) {
       const currentData = formData[data];
