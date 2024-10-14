@@ -48,8 +48,8 @@ function isValidYear(year) {
     // Checks if the given year is not in the correct range
     yearNum < 1000 ||
 
-    // Checks if the given year is not in the correct format
-    year.val1.length !== 4
+    // Checks if the given year is in the correct range
+    yearNum.toString().length !== 4
   ) {
     res.setToInvalid();
   }
@@ -110,18 +110,28 @@ function isValidDayForMonth(day, month, year) {
 
 function isPastDate(monthPair, dayPair, yearPair) {
   const today = new Date();
+  const currentYear = today.getFullYear();
+  const isYearValid = yearPair.val2.isValidResponse();
+  const errorMessage = 'Must be in the past';
 
-  // Checks if the given year is in the future
-  if (yearPair.val2.isValidResponse() && yearPair.val1 > today.getFullYear()) {
-    yearPair.val2.setToInvalid('Must be in the past');
+  // Checks if the provided year is valid
+  if (isYearValid) {
+    // Checks if the given year is in the future
+    if (yearPair.val1 > currentYear) {
+      yearPair.val2.setToInvalid(errorMessage);
+    }
+    
+    // Checks if it is the given year is the current one
+    if (isYearValid && yearPair.val1 === currentYear) {
+      // Checks if the given month is in the future
+      if (monthPair.val2.isValidResponse() && monthPair.val1 > (today.getMonth() + 1)) {
+        monthPair.val2.setToInvalid(errorMessage);
 
-  // Checks if the given month is in the future
-  } else if (monthPair.val2.isValidResponse() && monthPair.val1 > (today.getMonth() + 1)) {
-    monthPair.val2.setToInvalid('Must be in the past');
-
-  // Checks if the given day is in the future
-  } else if (dayPair.val2.isValidResponse() && dayPair.val1 > (today.getDate())) {
-    dayPair.val2.setToInvalid('Must be in the past');
+        // Checks if the given day is in the future
+      } else if (dayPair.val2.isValidResponse() && dayPair.val1 > (today.getDate())) {
+        dayPair.val2.setToInvalid(errorMessage);
+      }
+    }
   }
 }
 
