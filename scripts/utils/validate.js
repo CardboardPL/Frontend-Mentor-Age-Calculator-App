@@ -23,7 +23,7 @@ class validationResponse {
   }
 }
 
-class valuePair {
+export class valuePair {
   constructor(val1, val2) {
     this.val1 = val1;
     this.val2 = val2;
@@ -119,10 +119,9 @@ function isPastDate(monthPair, dayPair, yearPair) {
     // Checks if the given year is in the future
     if (yearPair.val1 > currentYear) {
       yearPair.val2.setToInvalid(errorMessage);
-    }
-    
-    // Checks if it is the given year is the current one
-    if (isYearValid && yearPair.val1 === currentYear) {
+
+      // Checks if the given year is the current year
+    } else if (yearPair.val1 === currentYear) {
       // Checks if the given month is in the future
       if (monthPair.val2.isValidResponse() && monthPair.val1 > (today.getMonth() + 1)) {
         monthPair.val2.setToInvalid(errorMessage);
@@ -178,4 +177,14 @@ export function validateDateString(dateStr, isPastRequired) {
   }
 
   return { status: isValid.isValidResponse(), isMonthValid, isDayValid, isYearValid };
+}
+
+export function displayErrorMessage(element, message) {
+  element.classList.add('invalid');
+  element.querySelector('.js-error-message').textContent = message;
+}
+
+export function hideErrorMessage(element) {
+  element.classList.remove('invalid');
+  element.querySelector('.js-error-message').textContent = '';
 }
