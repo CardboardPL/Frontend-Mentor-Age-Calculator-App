@@ -1,7 +1,8 @@
 import { extractFormData, isSubmitButton, isInputElem } from './utils/form.js';
 import { formatValue } from './utils/format.js';
-import { validateDateString } from './utils/validate.js';
+import { validateDateString, displayErrorMessage, hideErrorMessage, valuePair } from './utils/validate.js';
 import { calculateDateFromDate } from './utils/date.js';
+import { countUpElements } from './utils/count.js';
 
 document.addEventListener('click', (e) => {
   const clickedElem = e.target;
@@ -19,27 +20,27 @@ document.addEventListener('click', (e) => {
     const dateStringValidity = validateDateString(dateString, true);
 
     for (const data in formData) {
-      const currentData = formData[data];
       const dataWrapperElem = document.querySelector(`.js-input[name="${data}"]`).closest('.js-fieldset-input-wrapper');
       const dataType = dataWrapperElem.dataset.type;
       const dataTypeValidity = dateStringValidity[`is${dataType}Valid`];
 
-      if (currentData.trim() === '' || !dataTypeValidity.isValidResponse()) {
-        dataWrapperElem.classList.add('invalid');
+      if (!dataTypeValidity.isValidResponse()) {
+        displayErrorMessage(dataWrapperElem, dataTypeValidity.message);
         isValid = false;
       } else {
-        dataWrapperElem.classList.remove('invalid');
+        hideErrorMessage(dataWrapperElem);
       }
-
-      dataWrapperElem.querySelector('.js-error-message').textContent = dataTypeValidity.message;
     }
 
     if (dateStringValidity.status) {
       const age = calculateDateFromDate(dateString);
+      const valuePairs = [];
       
       for (const component in age) {
-        document.querySelector(`.js-${component}`).textContent = age[component];
+        valuePairs.push(new valuePair(age[component], document.querySelector(`.js-${component}`)));
       }
+
+      countUpElements(...valuePairs);
     }
   }
 });
