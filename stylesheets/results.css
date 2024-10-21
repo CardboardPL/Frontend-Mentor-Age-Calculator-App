@@ -17,3 +17,23 @@
   color: var(--clr-purple);
   margin-right: -1px;
 }
+
+@media (min-width: 590px) {
+  .calculator__results {
+    padding: 51.5px 0 25.5px 0;
+  }
+
+  .results__item {
+    font-size: 104px;
+    letter-spacing: -1.8px;
+    margin-bottom: 4px;
+  }
+
+  .results__item > .item__quantity {
+    letter-spacing: 16px;
+  }
+
+  .item__type {
+    margin-left: -16px;
+  }
+}
