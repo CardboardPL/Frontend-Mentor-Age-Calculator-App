@@ -22,9 +22,9 @@ body {
 main {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   min-height: 100vh;
-  padding: 1rem;
+  padding: 5.5rem 1rem 1rem 1rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -39,4 +39,10 @@ img {
 button, input {
   display: block;
   font: inherit;
+}
+
+@media (min-width: 590px) {
+  main {
+    align-items: center;
+  }
 }
