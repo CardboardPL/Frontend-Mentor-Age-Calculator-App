@@ -186,5 +186,4 @@ export function displayErrorMessage(element, message) {
 
 export function hideErrorMessage(element) {
   element.classList.remove('invalid');
-  element.querySelector('.js-error-message').textContent = '';
 }
