@@ -9,6 +9,7 @@ function countUpElement(target, element,  timeout = DEFAULT_TIMEOUT, base = DEFA
   }
 
   currTimeout = timeout;
+  element.parentElement.classList.add('counted');
 
   return new Promise((resolve) => {
     const increment = () => {

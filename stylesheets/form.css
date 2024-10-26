@@ -1,17 +1,24 @@
 .calculator__form {
   position: relative;
+  height: 172px;
   padding: 23.5px 0 62.5px 0;
+  transition: height 0.25s ease-in-out;
+}
+
+.calculator__form:has(.invalid) {
+  height: 201px;
 }
 
 .form__fieldset {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 15px;
   border: none;
 }
 
 .fieldset__input-wrapper {
   flex: 1;
+  max-width: 160px;
 }
 
 .fieldset__input-label {
@@ -24,6 +31,7 @@
 }
 
 .fieldset__input {
+  position: relative;
   font-size: 20px;
   font-weight: var(--fw-b);
   height: 54px;
@@ -34,6 +42,7 @@
   border-radius: 8px;
   outline: none;
   transition: border-color 0.15s ease-in-out;
+  z-index: 1;
 }
 
 .fieldset__input:hover,
@@ -66,17 +75,30 @@
 }
 
 /* Invalid State Styling */
-.fieldset__input-wrapper.invalid {
-  color: var(--clr-lightred);
-}
-
-.fieldset__input-wrapper.invalid > * {
-  color: inherit;
-}
-
 .fieldset__input-wrapper.invalid > .fieldset__input {
   border-color: var(--clr-lightred);
 }
+
+.fieldset__input-wrapper.invalid > .fieldset__input-label, 
+.fieldset__input-error-message {
+  color: var(--clr-lightred);
+}
+
+.fieldset__input-error-message {
+  display: block;
+  font-size: 10px;
+  font-style: italic;
+  position: relative;
+  top: -48px;
+  z-index: 0;
+  transition: top 0.3s ease-in-out;
+}
+
+.fieldset__input-wrapper.invalid > .fieldset__input-error-message {
+  margin-top: 8px;
+  top: 0px;
+}
+/* Invalid State Styling */
 
 .form__submit-button > img {
   height: 38%;
@@ -88,4 +110,43 @@
 
 .form__submit-button:active {
   background-color: hsl(0, 0%, 13%);
+}
+
+@media (min-width: 650px) {
+  .calculator__form {
+    padding-bottom: 47px;
+  }
+
+  .form__fieldset {
+    gap: 32px;
+  }
+
+  .fieldset__input-label {
+    font-size: 14px;
+  }
+
+  .fieldset__input {
+    font-size: 32px;
+    height: 72px;
+    padding: 23px;
+    margin-top: 8.5px;
+  }
+
+  /* Invalid State Styling */
+  .fieldset__input-error-message {
+    font-size: 14px;
+  }
+
+  .fieldset__input-wrapper.invalid > .fieldset__input-error-message {
+    top: -1px;
+  }
+  /* Invalid State Styling */
+
+  .form__submit-button {
+    height: 96px;
+    width: 96px;
+    right: 0;
+    left: initial;
+    transform: translate(0, 51%);
+  }
 }
