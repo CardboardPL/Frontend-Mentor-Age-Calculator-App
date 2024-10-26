@@ -1,7 +1,14 @@
-function countUpElement(target, element,  timeout = 20, base = 0) {
+const DEFAULT_TIMEOUT = 20;
+const DEFAULT_BASE = 0;
+let currTimeout = DEFAULT_TIMEOUT;
+
+function countUpElement(target, element,  timeout = DEFAULT_TIMEOUT, base = DEFAULT_BASE) {
   if (target < base) {
-    return Promise.reject('Target number must be greater than the base');
+    console.error(`Invalid target: ${target}. Target must be less than or equal to the base (${base})`);
+    return Promise.reject(new Error('Target number must be greater than the base'));
   }
+
+  currTimeout = timeout;
 
   return new Promise((resolve) => {
     const increment = () => {
@@ -12,7 +19,7 @@ function countUpElement(target, element,  timeout = 20, base = 0) {
         }
         element.textContent = base;
         base++;
-        setTimeout(increment, timeout)
+        setTimeout(increment, timeout);
       } else {
         resolve();
       }
@@ -26,12 +33,14 @@ let isCounting = false;
 let isCancelled = false;
 
 export async function countUpElements(...elements) {
-  isCancelled = false
+  isCancelled = false;
 
   if (isCounting) {
     isCounting = false;
     isCancelled = true;
-    countUpElements(...elements);
+    setTimeout(() => {
+      countUpElements(...elements);
+    }, currTimeout);
     return;
   }
 
