@@ -41,8 +41,9 @@ button, input {
   font: inherit;
 }
 
-@media (min-width: 590px) {
+@media (min-width: 650px) {
   main {
     align-items: center;
+    padding-top: 1rem;
   }
 }
