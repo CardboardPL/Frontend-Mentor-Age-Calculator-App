@@ -112,6 +112,31 @@
   background-color: hsl(0, 0%, 13%);
 }
 
+@media (max-width: 23.375rem) {
+  .calculator__form {
+    height: 9.875rem;
+  }
+
+  .calculator__form:has(.invalid) {
+    height: 11.375rem;
+  }
+
+  .fieldset__input-label {
+    font-size: 0.5rem;
+  }
+
+  .fieldset__input {
+    font-size: 1rem;
+    padding: 0.65625rem;
+  }
+
+  /* Invalid State Styling */
+  .fieldset__input-error-message {
+    font-size: 0.5rem;
+  }
+  /* Invalid State Styling */
+}
+
 @media (min-width: 40.625rem) {
   .calculator__form {
     padding-bottom: 2.9375rem;
