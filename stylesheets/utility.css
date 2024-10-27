@@ -1,8 +1,8 @@
 .u-sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
   clip-path: polygon(0% 0%, 0% 0%, 0% 0%, 0% 0%);
   overflow: hidden;
   white-space: nowrap;

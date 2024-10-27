@@ -1,45 +1,45 @@
 .calculator__form {
   position: relative;
-  height: 172px;
-  padding: 23.5px 0 62.5px 0;
+  height: 10.75rem;
+  padding: 1.46875rem 0 3.90625rem 0;
   transition: height 0.25s ease-in-out;
 }
 
 .calculator__form:has(.invalid) {
-  height: 201px;
+  height: 12.5625rem;
 }
 
 .form__fieldset {
   display: flex;
   justify-content: flex-start;
-  gap: 15px;
+  gap: 0.9375rem;
   border: none;
 }
 
 .fieldset__input-wrapper {
   flex: 1;
-  max-width: 160px;
+  max-width: 10rem;
 }
 
 .fieldset__input-label {
   display: block;
-  font-size: 12px;
+  font-size: 0.75rem;
   font-weight: var(--fw-b);
   text-transform: uppercase;
-  letter-spacing: 2.67px;
+  letter-spacing: 0.166875rem;
   color: var(--clr-smokeygrey);
 }
 
 .fieldset__input {
   position: relative;
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: var(--fw-b);
-  height: 54px;
+  height: 3.375rem;
   width: 100%;
-  margin-top: 4.5px;
-  padding: 15px;
-  border: 1px solid var(--clr-lightgrey);
-  border-radius: 8px;
+  margin-top: 0.28125rem;
+  padding: 0.9375rem;
+  border: 0.0625rem solid var(--clr-lightgrey);
+  border-radius: 0.5rem;
   outline: none;
   transition: border-color 0.15s ease-in-out;
   z-index: 1;
@@ -63,8 +63,8 @@
   position: absolute;
   bottom: 0;
   background-color: var(--clr-purple);
-  height: 64px;
-  width: 65px;
+  height: 4rem;
+  width: 4.0625rem;
   left: 50%;
   transform: translate(-50%, 52%);
   border: none;
@@ -86,17 +86,17 @@
 
 .fieldset__input-error-message {
   display: block;
-  font-size: 10px;
+  font-size: 0.625rem;
   font-style: italic;
   position: relative;
-  top: -48px;
+  top: -3rem;
   z-index: 0;
   transition: top 0.3s ease-in-out;
 }
 
 .fieldset__input-wrapper.invalid > .fieldset__input-error-message {
-  margin-top: 8px;
-  top: 0px;
+  margin-top: 0.5rem;
+  top: 0;
 }
 /* Invalid State Styling */
 
@@ -112,39 +112,39 @@
   background-color: hsl(0, 0%, 13%);
 }
 
-@media (min-width: 650px) {
+@media (min-width: 40.625rem) {
   .calculator__form {
-    padding-bottom: 47px;
+    padding-bottom: 2.9375rem;
   }
 
   .form__fieldset {
-    gap: 32px;
+    gap: 2rem;
   }
 
   .fieldset__input-label {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   .fieldset__input {
-    font-size: 32px;
-    height: 72px;
-    padding: 23px;
-    margin-top: 8.5px;
+    font-size: 2rem;
+    height: 4.5rem;
+    padding: 1.4375rem;
+    margin-top: 0.53125rem;
   }
 
   /* Invalid State Styling */
   .fieldset__input-error-message {
-    font-size: 14px;
+    font-size: 0.875rem;
   }
 
   .fieldset__input-wrapper.invalid > .fieldset__input-error-message {
-    top: -1px;
+    top: -0.0625rem;
   }
   /* Invalid State Styling */
 
   .form__submit-button {
-    height: 96px;
-    width: 96px;
+    height: 6rem;
+    width: 6rem;
     right: 0;
     left: initial;
     transform: translate(0, 51%);
