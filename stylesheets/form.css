@@ -1,6 +1,6 @@
 .calculator__form {
   position: relative;
-  height: 10.75rem;
+  height: 10.1875rem;
   padding: 1.46875rem 0 3.90625rem 0;
   transition: height 0.25s ease-in-out;
 }
@@ -139,6 +139,7 @@
 
 @media (min-width: 40.625rem) {
   .calculator__form {
+    height: 10.75rem;
     padding-bottom: 2.9375rem;
   }
 
